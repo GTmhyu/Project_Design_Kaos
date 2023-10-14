@@ -20,7 +20,7 @@ const Home = () => {
             <img
               src='./threejs.png'
               alt="logo"
-              className="w-20 h-20 object-contain"
+              className="w-20 h-20 object-contain" //
             />
           </motion.header>
 
