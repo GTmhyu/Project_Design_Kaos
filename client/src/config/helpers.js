@@ -4,10 +4,21 @@ export const downloadCanvasToImage = () => {
   const link = document.createElement("a");
 
   link.href = dataURL;
-  link.download = "canvas.png";
+  link.download = "Design.png";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+};
+//create a function to post,get,delete the image to the postman
+export const postImage = async (image) => {
+  const formData = new FormData();
+  formData.append("image", image);
+  const response = await fetch("http://localhost:5173/api/upload", {
+    method: "POST",
+    body: formData,
+  });
+  const data = await response.json();
+  return data;
 };
 
 export const reader = (file) =>
