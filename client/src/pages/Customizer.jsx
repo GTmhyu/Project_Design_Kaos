@@ -13,6 +13,31 @@ import { AIPicker, ColorPicker, Tab, FilePicker, CustomButton } from '../compone
 const Coustomizer = () => {
   const snap = useSnapshot(state);
 
+  const [file, setFile] = useState('');
+  const [prompt, setPrompt] = useState('');
+  const [generatingImg, setGeneratingImg] = useState(false);
+
+  const [activeEditorTab, setactiveEditorTab] = useState("")
+  const [activeFilterTab, setActiveFilterTab] = useState({
+    logoShirt: true,
+    stylishShirt: false,
+  });
+
+  //show tab content depending on activeTab
+  const generateTabContent = () => {
+    switch (activeEditorTab) {
+      case "colorpicker":
+        return <ColorPicker />
+      case "filepicker":
+        return <FilePicker />
+      case "aipicker":
+        return <AIPicker />
+      default:
+        return null;
+
+    }
+  }
+
   return (
     <AnimatePresence>
       {!snap.intro && (
@@ -29,11 +54,11 @@ const Coustomizer = () => {
               <Tab 
                 key={tab.name}
                 tab={tab}
-                handleClick={() => {}}
+                handleClick= {() => setactiveEditorTab(tab.name)}
               />
             ))}
-            </div>
-            
+            {generateTabContent()}
+            </div>  
           </div>
         </motion.div>
 
@@ -70,14 +95,6 @@ const Coustomizer = () => {
                 className='w-3/5 h-3/5 object-contain'
               />
             </button>
-
-            <button className='post-btn' onClick={postImage}>
-              <img
-                src={download}
-                alt='download_image'
-                className='w-3/5 h-3/5 object-contain'
-              />
-              </button>
           </motion.div>
         </>
       )}
