@@ -9,6 +9,7 @@ import { downloadCanvasToImage, postImage, reader } from '../config/helpers';
 import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
 import { AIPicker, ColorPicker, Tab, FilePicker, CustomButton } from '../components';
+import { Torus } from '@react-three/drei';
 
 const Coustomizer = () => {
   const snap = useSnapshot(state);
@@ -29,13 +30,47 @@ const Coustomizer = () => {
       case "colorpicker":
         return <ColorPicker />
       case "filepicker":
-        return <FilePicker />
+        return <FilePicker 
+        file={file}
+        setFile={setFile}
+        readFile={readfile}
+        />
       case "aipicker":
         return <AIPicker />
       default:
         return null;
 
     }
+  }
+  const handleDecals = (type, result) => {
+     const decalTypes = DecalTypes[type];
+
+     state[decalTypes.stateProperty] = result;
+     if (!activeFilterTab[decalTypes.isFilterTab]) {
+      handleActiveFilterTab(decalTypes.isFilterTab);
+     }
+  }
+
+  const handleActiveFilterTab = (tabname) => {
+    switch (tabname) {
+      case "logoShirt":
+        state.isLogoTexture = !activeFilterTab[tabname];
+        break;
+      case "stylishShirt":
+        state.isFullTexture = !activeFilterTab[tabname];
+        break;
+      default:
+        state.isLogoTexture = true;
+        state.isFullTexture = false;
+
+    }
+  }
+
+  const readfile = (type) => {
+    reader(file).then((result) => {
+      handleDecals(result, type);
+      setactiveEditorTab('');
+    })
   }
 
   return (

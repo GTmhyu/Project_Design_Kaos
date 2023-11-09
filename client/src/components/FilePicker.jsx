@@ -1,8 +1,11 @@
 import React from 'react'
 
-const FilePicker = () => {
+const FilePicker = ({file, setFile, readFile}) => {
   return (
-    <div>FilePicker</div>
+    <div className='filepicker-container'>
+      On-progress 
+      
+      </div>
   )
 }
 
