@@ -25,6 +25,3 @@ What i understand about:
 - Generate and use images through DALLE AI
 - Download the resulting t-shirt model image
 - Ensure responsiveness across all devices and improve your site's performance
-
-
-## My Path
