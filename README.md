@@ -1,5 +1,10 @@
 # Build and Deploy an AI-Powered 3D Website Using React | Three JS
+
+##Tampilan Home
 ![3D Website](https://github.com/GTmhyu/Foto/blob/main/Screenshot%20(125).png)
+
+##Tampilan Design Workspace
+![3D Website](https://github.com/GTmhyu/Foto/blob/main/Screenshot%20(124).png)
 
 
 ## Introduction
