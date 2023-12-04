@@ -1,5 +1,5 @@
 # Build and Deploy an AI-Powered 3D Website Using React | Three JS
-![3D Website](https://drive.google.com/file/d/1DlY7Jmpl1lXs15N2y4asqVAVAEm5sRy3/view?usp=drive_link)
+![3D Website](https://github.com/GTmhyu/Foto/blob/main/Screenshot%20(125).png)
 
 
 ## Introduction
