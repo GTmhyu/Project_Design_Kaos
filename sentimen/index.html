@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/bootstrap.min.css">
+    <title>Sentiment analysis</title>
+</head>
+<body>
+    <div class="col-lg-6 col-10 mx-auto py-5 my-5">
+        <h1>Sentiment analysis</h1>
+        <div class="card p-4">
+            <form id="form">
+                <input type="text" id="input" class="form-control form-lg">
+                <p class="mt-2" id="response">Sedang di proses</p>
+                <input type="submit" class="btn btn-primary" value="proses">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const responseElement = document.getElementById('response')
+        const inputElement = document.getElementById('input')
+        const formElement = document.getElementById('form')
+
+        formElement.addEventListener('submit', event => {
+            event.preventDefault();
+
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: inputElement.value
+                })
+            }).then(res => res.json())
+            .then(res => {
+                responseElement.innerText = res[0]?.label === 'POSITIVE' ? 'Pushing P!' : 'Negative vibes detected!';
+                inputElement.value = '';
+            })
+        })
+    </script>
+
+</body>
+</html>
