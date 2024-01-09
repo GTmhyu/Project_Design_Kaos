@@ -9,7 +9,7 @@ headContentAnimation,
 headTextAnimation,
 slideAnimation } from '../config/motion';
 
-const Home = () => {
+const home = () => {
     const snap = useSnapshot(state);
 
   return (
@@ -54,4 +54,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default home

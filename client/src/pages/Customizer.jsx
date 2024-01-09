@@ -4,11 +4,13 @@ import { useSnapshot } from 'valtio';
 
 import config from '../config/config';
 import state from '../store';
+import { feedback } from '../assets';
+import { chatbot } from '../assets';
 import { download } from '../assets';
 import { downloadCanvasToImage, reader } from '../config/helpers';
 import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
-import { AIPicker, ColorPicker, Tab, FilePicker, CustomButton } from '../components';
+import { AIPicker, ColorPicker,Tab, FilePicker, CustomButton } from '../components';
 import { Torus } from '@react-three/drei';
 
 const Coustomizer = () => {
@@ -121,39 +123,50 @@ const Coustomizer = () => {
   return (
     <AnimatePresence>
       {!snap.intro && (
-        <>
-        <motion.div 
-         key="Custom"
-         className='absolute top-0 left-0 z-10'
-         {...slideAnimation('left')}
+        <><>
+          <motion.div
+            key="Custom"
+            className='absolute top-0 left-0 z-10'
+            {...slideAnimation('left')}
 
-        >
-          <div className='flex items-center min-h-screen'>
-            <div className='editortabs-container tabs'>
-            {EditorTabs.map((tab) => (
-              <Tab 
-                key={tab.name}
-                tab={tab}
-                handleClick= {() => setactiveEditorTab(tab.name)}
-              />
-            ))}
-            {generateTabContent()}
-            </div>  
-          </div>
-        </motion.div>
+          >
+            <div className='flex items-center min-h-screen'>
+              <div className='editortabs-container tabs'>
+                {EditorTabs.map((tab) => (
+                  <Tab
+                    key={tab.name}
+                    tab={tab}
+                    handleClick={() => setactiveEditorTab(tab.name)} />
+                ))}
+                {generateTabContent()}
+              </div>
+            </div>
+            
+          </motion.div>
 
-        <motion.div 
-        className='absolute z-10 top-5 right-5'
-        {...fadeAnimation}
-        >
-          <CustomButton 
+          <motion.div
+            className='absolute z-10 top-5 right-8'
+            {...fadeAnimation}
+          >
+            <CustomButton
+              type='filled'
+              tittle="Back"
+              handleClick={() => state.intro = true}
+              customStyles="w-fit px-4 py-2.5 font-bold text-sm" />
+
+          </motion.div>
+          <motion.div
+            className='absolute z-10 top-5 right-28'
+            {...fadeAnimation}
+          >
+            <CustomButton
             type='filled'
-            tittle="Back"
-            handleClick={() => state.intro = true}
+            tittle="Login"
+            //handleClick={}
             customStyles="w-fit px-4 py-2.5 font-bold text-sm"
-          />
+            />
 
-        </motion.div >
+          </motion.div>
 
           <motion.div
             className='filtertabs-container'
@@ -165,21 +178,46 @@ const Coustomizer = () => {
                 tab={tab}
                 isFilterTab
                 isActiveTab={activeFilterTab[tab.name]}
-                handleClick={() => handleActiveFilterTab(tab.name)}
-              />
+                handleClick={() => handleActiveFilterTab(tab.name)} />
             ))}
             <button className='download-btn' onClick={downloadCanvasToImage}>
               <img
                 src={download}
                 alt='download_image'
-                className='w-3/5 h-3/5 object-contain'
-              />
+                className='w-3/5 h-3/5 object-contain' />
             </button>
           </motion.div>
-        </>
+
+        </><motion.div
+          key="Custom"
+          className='absolute top-0 right-0 z-10'
+          {...slideAnimation('right')}
+        >
+          <div className='flex items-center min-h-screen'>
+            <div className='editortabs-container tabs'>
+              
+              <a className='feedback-btn' href='http://127.0.0.1:5000/#'>
+                <img 
+                src={feedback}
+                alt='feedback'
+                className='w-4/5 h-3/5 object-contain'
+                />
+              </a>
+              <a className='chatbot-btn' href='http://localhost:7000'>
+                <img 
+                src={chatbot}
+                alt='chatbot'
+                className='w-4/5 h-3/5 object-contain'
+                />
+              </a>
+            </div>
+          </div>
+          </motion.div></>
       )}
+
     </AnimatePresence>
   )
 }
 
 export default Coustomizer
+
